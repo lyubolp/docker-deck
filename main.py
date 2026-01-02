@@ -33,7 +33,7 @@ def update_ui():
     main_ui.refresh()
 
 
-# ui.run(host="0.0.0.0", port=80)
 main_ui()
 ui.timer(5.0, update_ui)
-ui.run()
+ui.run(host="0.0.0.0", port=80)
+# ui.run()
