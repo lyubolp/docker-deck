@@ -1,4 +1,6 @@
-FROM ghcr.io/astral-sh/uv:python3.13-alpine
+FROM ghcr.io/astral-sh/uv:python3.13-trixie
+
+RUN apt-get update && apt-get install -y docker.io
 
 RUN mkdir /app
 WORKDIR /app
