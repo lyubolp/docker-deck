@@ -12,7 +12,10 @@ def get_running_containers():
     output = run(COMMAND, capture_output=True, text=True, check=False)
 
     if output.returncode != 0:
-        pass
+        print("Error executing docker command:")
+        print(output.stdout)
+        print(output.stderr)
+        return []
 
     running = parse_docker_ps_output(output.stdout)
     return running
@@ -20,7 +23,17 @@ def get_running_containers():
 
 def parse_docker_ps_output(output: str) -> list[Service]:
     lines = output.strip().split("\n")
-    containers = [json.loads(line) for line in lines if line]
+
+    containers = []
+    for line in lines:
+        if line != "":
+            try:
+                container = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            else:
+                containers.append(container)
+
     services = [build_service_from_container(container) for container in containers]
 
     return services
