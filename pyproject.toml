@@ -1,0 +1,17 @@
+[project]
+name = "docker-deck"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "nicegui>=3.4.1",
+    "pydantic>=2.12.5",
+]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.19.1",
+    "pylint>=4.0.4",
+]
