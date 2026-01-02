@@ -9,8 +9,6 @@ class ServiceState(Enum):
 
 
 class Service(BaseModel):
-    name: str
-    description: str
     container_name: str
     state: ServiceState
     port: int
