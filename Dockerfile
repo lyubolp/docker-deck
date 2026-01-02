@@ -12,4 +12,4 @@ EXPOSE 80
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "pygrader-web.py", "--server.port=80", "--server.address=0.0.0.0"]
+ENTRYPOINT ["uv", "run", "main.py"]
