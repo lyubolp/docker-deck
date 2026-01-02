@@ -29,4 +29,4 @@ with ui.column().classes("items-center justify-center min-w-screen"):
                         ui.label(container.image)
 
 
-ui.run()
+ui.run(host="0.0.0.0", port=80)
