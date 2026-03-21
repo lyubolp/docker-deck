@@ -93,6 +93,6 @@ def update_ui():
 
 ui.add_head_html(GLASS_CSS)
 main_ui()
-# ui.timer(5.0, update_ui)
-# ui.run(host="0.0.0.0", port=80)
-ui.run(favicon="icon.png")
+ui.timer(5.0, update_ui)
+ui.run(favicon="icon.png", host="0.0.0.0", port=80)
+# ui.run()
