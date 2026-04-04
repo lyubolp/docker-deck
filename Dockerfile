@@ -12,6 +12,6 @@ RUN uv sync --locked --no-dev
 
 EXPOSE 80
 
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+HEALTHCHECK CMD curl --fail http://localhost/_stcore/health
 
 ENTRYPOINT ["uv", "run", "main.py"]
