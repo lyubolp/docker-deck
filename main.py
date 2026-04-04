@@ -71,7 +71,7 @@ def main_ui():
             for container in containers:
                 def open_port(c=container):
                     if c.port != -1 and c.state == ServiceState.RUNNING:
-                        ui.navigate.to(f"http://localhost:{c.port}", new_tab=True)
+                        ui.run_javascript(f"window.open('http://' + window.location.hostname + ':{c.port}', '_blank')")
                     else:
                         ui.notify("No accessible port for this container", type="warning")
 
