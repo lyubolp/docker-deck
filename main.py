@@ -4,6 +4,7 @@ from pathlib import Path
 from nicegui import app, ui
 
 from docker_deck.data_gather import get_running_containers
+from docker_deck.models import ServiceState
 
 BACKGROUND_DIR = Path(__file__).parent / "background_images"
 app.add_static_files("/background_images", str(BACKGROUND_DIR))
@@ -68,7 +69,16 @@ def main_ui():
             .style("grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))")
         ):
             for container in containers:
-                with ui.card(align_items="center").classes("glass-card"):
+                def open_port(c=container):
+                    if c.port != -1 and c.state == ServiceState.RUNNING:
+                        ui.navigate.to(f"http://localhost:{c.port}", new_tab=True)
+                    else:
+                        ui.notify("No accessible port for this container", type="warning")
+
+                is_clickable = container.port != -1 and container.state == ServiceState.RUNNING
+                card_style = "cursor: pointer" if is_clickable else ""
+
+                with ui.card(align_items="center").classes("glass-card").style(card_style).on("click", open_port):
                     ui.label(container.container_name).classes("text-h6")
                     with ui.card_section():
                         with ui.grid(columns=2).classes("w-full"):
